@@ -37,8 +37,8 @@ public final class Helper {
 	}	
 		
 	public static RSAPublicKey readRSAPublicKeyFromFile(String filename) throws Exception {
-		String fileContents = new String(readFileAsBytes(filename));	
-		String publicKeyPEM = fileContents.replace("-----BEGIN PUBLIC KEY-----\n", "");
+		String fileContents = new String(readFileAsBytes(filename));
+		String publicKeyPEM = fileContents.replaceAll("-----BEGIN PUBLIC KEY-----(\n|\r|\r\n)", "");
 		publicKeyPEM = publicKeyPEM.replace("-----END PUBLIC KEY-----", "");
 
 		byte[] decoded = org.bouncycastle.util.encoders.Base64.decode(publicKeyPEM.trim());
